@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "any2poster"
+version = "0.3.0"
+description = "Any-source academic poster generation with deterministic HTML/CSS rendering and VLM feedback loop"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Amogh Vinaykumar", email = "amogh.vinaykumar@gmail.com"},
+    {name = "Aiden Li", email = "yiliu.li@outlook.com"},
+    {name = "Suozhi Huang", email = "suozhi.huang@princeton.edu"},
+    {name = "Shilong Liu", email = "shilong.liu@princeton.edu"},
+]
+
+dependencies = [
+    "click>=8.1",
+    "pydantic>=2.0",
+    "python-dotenv>=1.0",
+    "openai>=1.0",
+    "requests>=2.31",
+    "Pillow>=10.0",
+    "tenacity>=8.2",
+    "ftfy>=6.1",
+    "docling>=2.0",
+    "reportlab>=4.0",
+    "python-pptx>=0.6.23",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "ruff>=0.1",
+]
+render = [
+    "playwright>=1.40",
+]
+
+[project.scripts]
+any2poster = "any2poster.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["any2poster*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+

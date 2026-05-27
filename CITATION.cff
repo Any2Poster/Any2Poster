@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use Any2Poster in your research, please cite it as below."
+type: software
+title: "Any2Poster: Any-Source Poster Generation Across Modalities and Domains"
+authors:
+  - family-names: "Vinaykumar"
+    given-names: "Amogh"
+    affiliation: "Flower Mound High School"
+    email: "amogh.vinaykumar@gmail.com"
+  - family-names: "Li"
+    given-names: "Aiden"
+    affiliation: "University College London"
+    email: "yiliu.li@outlook.com"
+  - family-names: "Huang"
+    given-names: "Suozhi"
+    affiliation: "Princeton University"
+    email: "suozhi.huang@princeton.edu"
+  - family-names: "Liu"
+    given-names: "Shilong"
+    affiliation: "Princeton University"
+    email: "shilong.liu@princeton.edu"
+version: "0.3.0"
+date-released: "2025-05-27"
+license: MIT
+repository-code: "https://github.com/Any2Poster/Any2Poster"
+url: "https://any2poster.github.io"
+abstract: >
+  Any2Poster is a universal academic poster generation system that accepts
+  any input format (PDF, DOCX, PPTX, LaTeX, Markdown, Jupyter Notebook,
+  HTML, and video) and produces a publication-quality poster using
+  deterministic HTML/CSS text rendering via Playwright and a panel-level
+  VLM feedback loop that closes the engagement gap identified in Paper2Poster.
+keywords:
+  - poster-generation
+  - academic-poster
+  - multi-agent
+  - vision-language-models
+  - benchmark
+  - html-css
+  - playwright
+  - research-automation

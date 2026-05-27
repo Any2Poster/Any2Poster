@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment secrets
+.env
+
+# Outputs and generated files
+outputs/
+checkpoints/
+*.pdf
+*.png
+
+# Keep assets folder pngs
+!assets/*.png
+!assets/*.pdf
+
+# Result dumps — upload these to HuggingFace instead
+ablation_results/
+any2poster_bench_results/
+baseline_results/
+eval_results/
+paper2poster_comparison_sample/
+
+# Playwright
+playwright-report/
+test-results/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+Paper2Poster-data/
+PosterSum-data/
