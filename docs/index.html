@@ -359,12 +359,6 @@
     <a href="mailto:shilong.liu@princeton.edu">Shilong Liu</a><sup>3</sup>
   </div>
 
-  <div class="affiliations">
-    <sup>1</sup>Flower Mound High School &nbsp;&nbsp;
-    <sup>2</sup>University College London &nbsp;&nbsp;
-    <sup>3</sup>Princeton University
-  </div>
-
   <div class="btn-row">
     <a class="btn btn-red" href="https://arxiv.org">📄 Paper (coming soon)</a>
     <a class="btn" href="https://github.com/Any2Poster/Any2Poster">💻 Code</a>
@@ -529,7 +523,7 @@
 <div id="abstract" class="section">
   <h2>Abstract</h2>
   <div class="abstract-box">
-    Academic poster generation is a crucial yet challenging task in scientific communication, requiring the compression of long-context interleaved documents into a single, visually coherent page. Existing approaches are limited to PDF input and produce output through either PPTX XML or AI image generation — both of which introduce rendering errors and typography hallucinations. We introduce <strong>Any2Poster</strong>, a universal poster generation system that accepts any input format (PDF, DOCX, PPTX, LaTeX, Markdown, Jupyter Notebook, HTML, and video) through a unified normalized schema, and renders all text deterministically via HTML/CSS and Playwright — guaranteeing pixel-accurate typography with zero hallucination. A panel-level VLM feedback loop with a fixed error vocabulary applies deterministic CSS mutations to resolve layout failures, directly addressing the engagement bottleneck identified as unsolved in prior work. We further introduce <strong>Any2Poster Bench</strong>, a multi-format, cross-domain benchmark featuring genre-aware MCQ generation, BenchQuiz scoring, and VLM-as-diverse-readers evaluation across six criteria.
+    Visual posters are a compact medium for communicating dense information, yet progress on automatic poster generation remains difficult to measure because existing evaluations are often restricted to paper-only inputs, narrow domains, or surface-level visual similarity. We introduce Any2Poster Bench, a benchmark for any-source poster generation that evaluates systems across eight input modalities—PDFs, URLs, PPTX, DOCX, Markdown, LaTeX, notebooks, and videos—and five content domains. Any2Poster Bench pairs each source with quiz-based probes of verbatim factual retention and interpretive understanding, together with VLM-based judgments of visual quality, layout, readability, content completeness, and logical flow, enabling reproducible assessment of both information fidelity and visual communication. To instantiate and validate this benchmark, we further present Any2Poster Agent, an end-to-end reference agent that parses heterogeneous sources, organizes salient content, plans poster layouts, renders posters, and iteratively refines them using visual feedback. On Any2Poster Bench, Any2Poster Agent achieves 87.25% average accuracy across input modalities and 87.28% across content domains. On PaperQuiz-style evaluation, where prior paper-to-poster agents are directly comparable, Any2Poster Agent improves over PosterAgent-4o from 51.06–51.33% to 72.58% overall accuracy and from 116–121 to 145.16 in density-augmented score. Together, Any2Poster Bench and Any2Poster Agent provide a reusable evaluation resource and a competitive baseline for studying multimodal, domain-general poster generation.
   </div>
 </div>
 
