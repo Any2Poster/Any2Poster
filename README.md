@@ -12,7 +12,7 @@ We address **How to generate a poster from any input source** and **How to evalu
 
 ---
 
-## 🤩 Any2Poster Generating Its Own Poster
+## 🤩 Any2Poster in Action
 
 [![Any2Poster Example](assets/aaai_poster6.png)](assets/aaai_poster6.png)
 
