@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Any2Poster: Any-Source Poster Generation Across Modalities and Domains</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%);
+      border-bottom: 1px solid #21262d;
+      padding: 60px 20px 50px;
+      text-align: center;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 30px;
+    }
+
+    .badge-row img {
+      height: 22px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #58a6ff, #79c0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: #8b949e;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .btn-primary {
+      background: #238636;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #21262d;
+      color: #e6edf3;
+      border: 1px solid #30363d;
+    }
+
+    .btn-hf {
+      background: #ff9d00;
+      color: #000;
+    }
+
+    section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    section + section {
+      border-top: 1px solid #21262d;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #58a6ff;
+      margin-bottom: 24px;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #e6edf3;
+      margin-bottom: 8px;
+    }
+
+    .poster-img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #30363d;
+      margin-top: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .contributions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 22px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover { border-color: #58a6ff; }
+
+    .card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+
+    .card p { color: #8b949e; font-size: 0.92rem; margin-top: 6px; }
+
+    .pipeline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stage {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 14px 18px;
+      text-align: center;
+      min-width: 120px;
+      font-size: 0.88rem;
+    }
+
+    .stage .emoji { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+    .stage .name { font-weight: 700; color: #58a6ff; }
+    .stage .desc { color: #8b949e; font-size: 0.78rem; margin-top: 3px; }
+
+    .arrow {
+      color: #58a6ff;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: #161b22;
+      color: #58a6ff;
+      padding: 12px 16px;
+      text-align: left;
+      border: 1px solid #30363d;
+      font-weight: 700;
+    }
+
+    td {
+      padding: 11px 16px;
+      border: 1px solid #21262d;
+      color: #e6edf3;
+    }
+
+    tr:nth-child(even) td { background: #161b22; }
+
+    .highlight td { color: #79c0ff; font-weight: 600; }
+
+    .authors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 16px;
+      justify-content: center;
+    }
+
+    .author {
+      text-align: center;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 20px 28px;
+    }
+
+    .author .name { font-weight: 700; font-size: 1rem; color: #e6edf3; }
+    .author .affil { color: #8b949e; font-size: 0.85rem; margin-top: 4px; }
+
+    .code-block {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      color: #79c0ff;
+      margin-top: 16px;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #484f58;
+      font-size: 0.88rem;
+      border-top: 1px solid #21262d;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6rem; }
+      .pipeline { flex-direction: column; align-items: stretch; }
+      .arrow { transform: rotate(90deg); text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge-row">
+    <img src="https://img.shields.io/badge/arXiv-coming%20soon-red" alt="arXiv" />
+    <img src="https://img.shields.io/badge/GitHub-Any2Poster-181717?logo=github" alt="GitHub" />
+    <img src="https://img.shields.io/badge/🤗%20HuggingFace-Dataset-orange" alt="HuggingFace" />
+    <img src="https://img.shields.io/badge/Python-3.10%2B-blue" alt="Python" />
+    <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License" />
+  </div>
+
+  <h1>🎓 Any2Poster</h1>
+  <p class="subtitle">
+    Any-Source Poster Generation Across Modalities and Domains —
+    turn any document, slideshow, notebook, or video into a
+    publication-quality academic poster.
+  </p>
+
+  <div class="btn-row">
+    <a class="btn btn-primary" href="https://github.com/Any2Poster/Any2Poster">⭐ GitHub</a>
+    <a class="btn btn-hf" href="https://huggingface.co/datasets/Any2Poster/Any2Poster-Bench">🤗 Dataset</a>
+    <a class="btn btn-secondary" href="https://arxiv.org">📄 Paper (coming soon)</a>
+  </div>
+</header>
+
+<!-- EXAMPLE POSTER -->
+<section>
+  <h2>🤩 Any2Poster for Any2Poster</h2>
+  <p style="color:#8b949e;">A poster generated by Any2Poster from the Any2Poster paper itself.</p>
+  <img class="poster-img" src="https://github.com/Any2Poster/Any2Poster/raw/main/assets/aaai_poster6.png" alt="Any2Poster example poster" />
+</section>
+
+<!-- KEY CONTRIBUTIONS -->
+<section>
+  <h2>✨ Key Contributions</h2>
+  <div class="contributions">
+    <div class="card">
+      <div class="card-icon">📄</div>
+      <h3>Universal Input Abstraction</h3>
+      <p>A single normalized schema ingests PDF, DOCX, PPTX, LaTeX, Markdown, Jupyter Notebook, HTML/URL, and YouTube video. No source-specific pipelines.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🖥️</div>
+      <h3>Deterministic HTML/CSS Rendering</h3>
+      <p>All text is rendered pixel-accurately via Playwright. Unlike prior work that pipes text through image models, Any2Poster guarantees zero typography hallucination.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔁</div>
+      <h3>Panel-Level VLM Feedback Loop</h3>
+      <p>Structured error codes from a fixed vocabulary trigger deterministic CSS mutations. Closes the engagement bottleneck explicitly identified as unsolved in Paper2Poster.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <h3>Data Extractor Validation</h3>
+      <p>Chart values are grounded verbatim in source text before image generation, eliminating fabricated statistics.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🖼️</div>
+      <h3>Hybrid Figure Strategy</h3>
+      <p>Original extracted figures are preserved and placed. AI generation is reserved only for panels with no suitable extracted figure.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>Any2Poster Bench</h3>
+      <p>A multi-format, cross-domain benchmark with genre-aware MCQ generation, BenchQuiz scoring, and VLM-as-diverse-readers evaluation across 6 criteria.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section>
+  <h2>🏗️ Pipeline Overview</h2>
+  <p style="color:#8b949e;">Any2Poster transforms any input through a 6-stage checkpointed pipeline.</p>
+  <div class="pipeline">
+    <div class="stage">
+      <span class="emoji">🔍</span>
+      <span class="name">Parse</span>
+      <span class="desc">Extract text, figures, tables via Docling</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="stage">
+      <span class="emoji">✂️</span>
+      <span class="name">Chunk</span>
+      <span class="desc">Semantic section segmentation</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="stage">
+      <span class="emoji">🧠</span>
+      <span class="name">Analyze</span>
+      <span class="desc">Two-pass LLM analysis</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="stage">
+      <span class="emoji">📐</span>
+      <span class="name">Plan</span>
+      <span class="desc">3-column grid layout</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="stage">
+      <span class="emoji">🎨</span>
+      <span class="name">Generate</span>
+      <span class="desc">HTML/CSS + AI visuals</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="stage">
+      <span class="emoji">📄</span>
+      <span class="name">Compile</span>
+      <span class="desc">Playwright PDF/PNG + VLM feedback</span>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section>
+  <h2>⚡ Comparison with Prior Work</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Paper2Poster</th>
+        <th>Paper2Slides</th>
+        <th>Any2Poster</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Input formats</td>
+        <td>PDF only</td>
+        <td>PDF, DOCX, PPTX, MD</td>
+        <td>PDF, DOCX, PPTX, LaTeX, MD, ipynb, HTML, Video</td>
+      </tr>
+      <tr>
+        <td>Output format</td>
+        <td>PPTX</td>
+        <td>PDF (image-rendered)</td>
+        <td>PDF + PNG + HTML artifact</td>
+      </tr>
+      <tr>
+        <td>Text rendering</td>
+        <td>PPTX XML</td>
+        <td>AI image generation</td>
+        <td>Deterministic HTML/CSS via Playwright</td>
+      </tr>
+      <tr>
+        <td>VLM feedback loop</td>
+        <td>✅ Panel-level</td>
+        <td>❌</td>
+        <td>✅ Panel-level with fixed error vocabulary</td>
+      </tr>
+      <tr class="highlight">
+        <td>Evaluation benchmark</td>
+        <td>PaperQuiz (PDF only)</td>
+        <td>❌ None</td>
+        <td>Any2Poster Bench (multi-format, cross-domain)</td>
+      </tr>
+      <tr>
+        <td>Checkpoint / resume</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>✅ Full 6-stage checkpointing</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- QUICK START -->
+<section>
+  <h2>🚀 Quick Start</h2>
+  <div class="code-block">git clone https://github.com/Any2Poster/Any2Poster.git
+cd Any2Poster
+python -m venv .venv
+.venv\Scripts\activate        # Windows
+source .venv/bin/activate     # macOS / Linux
+pip install -r requirements.txt
+pip install -e ".[render]"
+playwright install chromium
+
+# Generate a poster
+any2poster paper.pdf
+
+# With VLM feedback loop
+any2poster paper.pdf --feedback --feedback-iters 2 -o poster.pdf</div>
+</section>
+
+<!-- AUTHORS -->
+<section>
+  <h2>👥 Authors</h2>
+  <div class="authors">
+    <div class="author">
+      <div class="name">Amogh Vinaykumar</div>
+      <div class="affil">Flower Mound High School</div>
+    </div>
+    <div class="author">
+      <div class="name">Aiden Li</div>
+      <div class="affil">University College London</div>
+    </div>
+    <div class="author">
+      <div class="name">Suozhi Huang</div>
+      <div class="affil">Princeton University</div>
+    </div>
+    <div class="author">
+      <div class="name">Shilong Liu</div>
+      <div class="affil">Princeton University</div>
+    </div>
+  </div>
+</section>
+
+<!-- CITATION -->
+<section>
+  <h2>📖 Citation</h2>
+  <div class="code-block">@misc{any2poster2026,
+  title  = {Any2Poster: Any-Source Poster Generation Across Modalities and Domains},
+  author = {Vinaykumar, Amogh and Li, Aiden and Huang, Suozhi and Liu, Shilong},
+  year   = {2026},
+  url    = {https://github.com/Any2Poster/Any2Poster}
+}</div>
+</section>
+
+<footer>
+  Made with ❤️ by Amogh Vinaykumar, Aiden Li, Suozhi Huang, and Shilong Liu
+</footer>
+
+</body>
+</html>
