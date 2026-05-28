@@ -332,5 +332,3 @@ If you find Any2Poster useful in your research, please cite:
   url       = {https://github.com/Any2Poster/Any2Poster}
 }
 ```
-
----
