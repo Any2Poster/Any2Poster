@@ -193,32 +193,36 @@ any2poster paper.pdf \
 ---
 
 ## ⚙️ Full CLI Reference
+
+```
 Usage: any2poster [OPTIONS] INPUT_PATH
+
 Options:
--o, --output PATH                     Output file (.pdf or .png)
---style STYLE                         Color theme [default: light]
---mode [professional|casual]          Layout mode [default: professional]
---width FLOAT                         Poster width in inches [default: 48.0]
---height FLOAT                        Poster height in inches [default: 36.0]
---dpi INT                             Output resolution [default: 150]
---logo-left PATH                      Left banner logo
---logo-right PATH                     Right banner logo
---resume / --no-resume                Resume from checkpoint [default: no-resume]
---debug / --no-debug                  Verbose output
---generate-visuals                    Generate AI diagrams via Gemini 3 Pro
---llm-model TEXT                      LLM model ID override
---image-model TEXT                    Image model ID override
---vision-model TEXT                   Vision model for quality checks
---feedback / --no-feedback            Enable panel VLM feedback loop
---feedback-iters INT                  Max feedback iterations [default: 2]
---feedback-model TEXT                 Vision model for feedback loop
---quality-check / --no-quality-check  Validate generated visuals
---quality-retries INT                 Extra retries when quality fails
---bg-color TEXT                       Custom background hex
---header-color TEXT                   Custom panel header hex
---header-text-color TEXT              Custom header text hex
---text-color TEXT                     Custom body text hex
---interactive                         Prompt for style and mode interactively
+  -o, --output PATH                     Output file (.pdf or .png)
+  --style STYLE                         Color theme [default: light]
+  --mode [professional|casual]          Layout mode [default: professional]
+  --width FLOAT                         Poster width in inches [default: 48.0]
+  --height FLOAT                        Poster height in inches [default: 36.0]
+  --dpi INT                             Output resolution [default: 150]
+  --logo-left PATH                      Left banner logo
+  --logo-right PATH                     Right banner logo
+  --resume / --no-resume                Resume from checkpoint [default: no-resume]
+  --debug / --no-debug                  Verbose output
+  --generate-visuals                    Generate AI diagrams via Gemini 3 Pro
+  --llm-model TEXT                      LLM model ID override
+  --image-model TEXT                    Image model ID override
+  --vision-model TEXT                   Vision model for quality checks
+  --feedback / --no-feedback            Enable panel VLM feedback loop
+  --feedback-iters INT                  Max feedback iterations [default: 2]
+  --feedback-model TEXT                 Vision model for feedback loop
+  --quality-check / --no-quality-check  Validate generated visuals
+  --quality-retries INT                 Extra retries when quality fails
+  --bg-color TEXT                       Custom background hex
+  --header-color TEXT                   Custom panel header hex
+  --header-text-color TEXT              Custom header text hex
+  --text-color TEXT                     Custom body text hex
+  --interactive                         Prompt for style and mode interactively
+```
 
 ---
 
