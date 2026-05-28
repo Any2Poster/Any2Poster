@@ -31,7 +31,7 @@ We address **How to generate a poster from any input source** and **How to evalu
 
 ## 🔥 Updates
 
-- **[2025.05.27]** Initial public release of Any2Poster v0.3.0 — code, benchmark, and eval pipeline.
+- **[2026.05.27]** Initial public release of Any2Poster v0.3.0 — code, benchmark, and eval pipeline.
 
 ---
 
@@ -325,16 +325,12 @@ We thank [Paper2Poster](https://github.com/Paper2Poster/Paper2Poster), [Paper2Sl
 If you find Any2Poster useful in your research, please cite:
 
 ```bibtex
-@misc{any2poster2025,
+@misc{any2poster2026,
   title     = {Any2Poster: Any-Source Poster Generation Across Modalities and Domains},
   author    = {Vinaykumar, Amogh and Li, Aiden and Huang, Suozhi and Liu, Shilong},
-  year      = {2025},
+  year      = {2026},
   url       = {https://github.com/Any2Poster/Any2Poster}
 }
 ```
 
 ---
-
-<p align="center">
-  Made by Amogh Vinaykumar, Aiden Li, Suozhi Huang, and Shilong Liu
-</p>
