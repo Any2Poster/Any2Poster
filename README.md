@@ -33,10 +33,6 @@ We address **How to generate a poster from any input source** and **How to evalu
 
 - **[2026.05.27]** Initial public release of Any2Poster v0.3.0 — code, benchmark, and eval pipeline.
 
----
-
-## 🏗️ Pipeline Overview
-
 [![Any2Poster Pipeline](assets/pipeline.png)](assets/pipeline.png)
 
 Any2Poster transforms any input through a **6-stage checkpointed pipeline**:
