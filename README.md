@@ -37,6 +37,8 @@ We address **How to generate a poster from any input source** and **How to evalu
 
 ## 🏗️ Pipeline Overview
 
+[![Any2Poster Pipeline](assets/pipeline.png)](assets/pipeline.png)
+
 Any2Poster transforms any input through a **6-stage checkpointed pipeline**:
 
 | Stage | Name | Description | Checkpoint |
